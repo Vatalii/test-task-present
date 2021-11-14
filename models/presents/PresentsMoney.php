@@ -17,7 +17,7 @@ use Yii;
 class PresentsMoney extends \yii\db\ActiveRecord implements PresentsInterface
 {
 
-    const K = 0.5;
+    const K = 10;
 
 
     /**
@@ -63,9 +63,9 @@ class PresentsMoney extends \yii\db\ActiveRecord implements PresentsInterface
         return $this->hasOne(Presents::className(), ['id' => 'present_id']);
     }
 
-    public function send($money=true)
+    public function send()
     {
-        return$money ? $this->sendMoney() : $this->sendBonuses();
+        return $this->present->type == Presents::TYPE_MONEY ? $this->sendMoney() : $this->sendBonuses();
     }
 
     public function sendMoney()
