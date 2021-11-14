@@ -79,9 +79,7 @@ class Presents extends \yii\db\ActiveRecord
             return false;
         }
 
-        $is_money = $this->type == self::TYPE_MONEY;
-
-        if($this->presentType->send($is_money)){
+        if($this->presentType->send()){
             $this->is_send = 1;
 
             return $this->validate() && $this->save();
