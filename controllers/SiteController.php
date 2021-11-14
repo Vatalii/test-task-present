@@ -61,7 +61,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        if(Yii::$app->user->isGuest) {
+            return $this->render('index');
+        }
+
+        return $this->redirect(['/presents']);
+
     }
 
     /**
@@ -72,7 +77,7 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->redirect(['/presents']);
         }
 
         $model = new LoginForm();
